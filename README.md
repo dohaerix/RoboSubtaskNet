@@ -215,7 +215,7 @@ The sample is intended for:
 - reproducing qualitative visualizations, and
 - examining the expected input/output structure.
 
-All six videos were selected such that their per-video accuracy closely matches RoboSubtaskNet's aggregate accuracy reported in the manuscript (94.33%) — the resulting sample yields an overall accuracy of 94.28% — rather than being chosen for exclusively high-performing predictions.
+All six videos were selected such that their per-video accuracy and boundary error closely match RoboSubtaskNet's aggregate results reported in the manuscript (94.33% accuracy) — the resulting sample yields an overall accuracy of 94.73% and a boundary error of 0.85 frames (manuscript: 0.84) — rather than being chosen for exclusively high-performing predictions.
 
 The complete dataset consists of **2,080 manipulation demonstrations**, including **1,920 training videos and 160 held-out test videos**.
 

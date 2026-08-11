@@ -217,6 +217,16 @@ metrics_df.columns = ["Activity", "#Videos", "Acc(%)", "Edit(%)", "F1@10(%)", "F
 metrics_csv = os.path.join(HERE, "metrics_per_activity.csv")
 metrics_df.to_csv(metrics_csv, index=False, float_format="%.2f")
 print(metrics_df.to_string(index=False))
+print(
+    f"\n{'='*78}\n"
+    f"NOTE: the numbers above are computed on the {overall['n']} representative test\n"
+    f"video(s) included in this repository, NOT the full 160-video held-out test\n"
+    f"set used for the results reported in the manuscript (README: 'Quantitative\n"
+    f"Results'). They are expected to be close but not identical to the paper's\n"
+    f"reported numbers -- this is a small-sample effect, not a discrepancy in the\n"
+    f"model or checkpoint. See README.md for the official reference table.\n"
+    f"{'='*78}"
+)
 print(f"\nSaved: {metrics_csv}")
 
 # ---------------------------------------------------------------------
