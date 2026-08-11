@@ -1,4 +1,4 @@
-# RoboSubtaskNet — Showcase
+# RoboSubtaskNet — Workflow Pipeline
 
 A basic-level showcase of **RoboSubtaskNet**: a two-stream (RGB +
 optical-flow I3D features) multi-stage temporal convolutional network
