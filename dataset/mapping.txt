@@ -1,0 +1,8 @@
+0 Reach
+1 Pick
+2 Move
+3 Place
+4 Withdraw
+5 Give
+6 Tilt
+7 Wipe

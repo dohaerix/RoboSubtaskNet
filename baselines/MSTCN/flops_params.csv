@@ -1,0 +1,2 @@
+Model,Input length T (mean test frames),Params,Params (M),MACs,GMACs,FLOPs,GFLOPs
+MS-TCN,55,795424,0.795,43450880,0.043,86901760,0.087

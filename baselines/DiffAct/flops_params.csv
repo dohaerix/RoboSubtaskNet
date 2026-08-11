@@ -1,0 +1,2 @@
+Model,Input length T (mean test frames),Params,Params (M),MACs (enc + 25x dec),GMACs,FLOPs,GFLOPs
+DiffAct,55,1204096,1.204,209041920,0.209,418083840,0.418

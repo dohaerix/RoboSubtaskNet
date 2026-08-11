@@ -1,0 +1,8 @@
+# Extra dependencies needed to run the 5 baselines in this folder, on top
+# of the root requirements.txt (torch, numpy, pandas, matplotlib, thop, tqdm).
+# Install both: pip install -r requirements.txt -r baselines/requirements.txt
+seaborn>=0.13       # ASFormer/eval.py plotting
+loguru>=0.7          # MSTCN2/model.py logging
+tensorboard>=2.15    # DiffAct training/eval (torch.utils.tensorboard)
+yacs>=0.1.8          # FACT config system
+scipy>=1.11           # DiffAct/dataset.py (interpolation, boundary smoothing)

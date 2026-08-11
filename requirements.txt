@@ -1,0 +1,6 @@
+torch>=2.5.1
+numpy>=1.26
+pandas>=2.0
+matplotlib>=3.8
+thop>=0.1.1
+tqdm>=4.65

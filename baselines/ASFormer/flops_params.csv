@@ -1,0 +1,2 @@
+Model,Input length T (mean test frames),Params,Params (M),MACs,GMACs,FLOPs,GFLOPs
+ASFormer,55,1129504,1.13,76432792,0.076,152865584,0.153
