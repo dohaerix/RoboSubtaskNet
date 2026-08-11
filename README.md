@@ -1,141 +1,294 @@
-# RoboSubtaskNet — Workflow Pipeline
+# RoboSubtaskNet — Execution-Aware Temporal Primitive Segmentation for Robot Manipulation
 
-A basic-level showcase of **RoboSubtaskNet**: a two-stream (RGB +
-optical-flow I3D features) multi-stage temporal convolutional network
-(MS-TCN backbone with Fibonacci dilations) for frame-wise **temporal
-action segmentation** of robot-manipulation subtasks, with end-to-end
-validation on a real Kinova Gen3 arm.
+This repository provides a **research evaluation and demonstration package** for **RoboSubtaskNet**, a two-stream temporal action segmentation framework for recognizing robot-manipulation subtasks from human demonstration videos.
 
-This repo is meant to be cloned, installed, and run in a couple of
-minutes — a trained checkpoint, a small runnable sample of the dataset,
-testing/evaluation code, qualitative visualization code (including the
-5 baseline architectures so the full 6-model comparison figure below can
-be regenerated), and a demonstration video. It is **not** the full
-research artifact: for the complete dataset (2080 videos) and the raw-
-video-to-features preprocessing pipeline, see the permanent repository,
-**RoboSubtaskNet** *(link will point to its own GitHub URL once
-published)*.
+RoboSubtaskNet combines **RGB and optical-flow I3D features** with an **MS-TCN-based temporal segmentation architecture using Fibonacci dilation schedules**. The predicted primitive-level action sequence is subsequently mapped to Dynamic Movement Primitive (DMP)-based robot execution and validated on a **Kinova Gen3 robotic manipulator**.
 
-## Pipeline
+The current repository is intended to support **inference, evaluation, qualitative visualization, and demonstration of the proposed framework**. It includes trained model checkpoints, representative test samples, evaluation scripts, visualization utilities, baseline implementations, and real-robot demonstration videos.
+
+> **Release status:** This repository currently contains the components required for testing and qualitative/quantitative evaluation of trained models. The complete RoboSubtask dataset, training pipeline, raw-video preprocessing and feature-extraction code, and additional implementation details will be made publicly available upon publication of the corresponding work.
+
+---
+
+## Overview
+
+The overall framework follows the pipeline:
+
+**Human demonstration video → RGB/Optical-flow feature extraction → RoboSubtaskNet temporal primitive segmentation → DMP goal resolution → Robot execution**
+
+RoboSubtaskNet performs frame-wise segmentation of manipulation demonstrations into executable robotic primitives. The resulting primitive sequence can subsequently be used for robot execution without retraining the underlying control policy.
 
 ![Workflow pipeline](figures/workflow_pipeline.jpg)
 
-Human demonstration video → RoboSubtaskNet sub-task segmentation → DMP
-goal resolution → robot execution, without retraining the control policy.
+---
 
-## Real-time Experiments Demonstration
+## Repository Scope
 
-[`demo/RoboSubtaskNet_Realtime_Experments.mp4`](demo/RoboSubtaskNet_Realtime_Experments.mp4)
-— the IROS submission demonstration video: the Kinova Gen3 arm executing
-all four manipulation tasks end to end, driven by RoboSubtaskNet's
-sub-task predictions (see [Pipeline](#pipeline) above for the mechanism
-this demonstrates).
+The current release provides the components necessary to evaluate and visualize the trained RoboSubtaskNet framework.
 
-`demo/` also has three shorter test clips (`pick_place_demo_1.avi`,
-`pick_pour_demo_1.avi`, `pick_pour_demo_2.avi`) captured while testing
-the live-inference pipeline on the same two tasks shown in the
-[qualitative results](#qualitative-results) below — informal, not as
-polished as the main demo video, but real footage of the model running.
+### Currently available
 
-## Results (as reported in the paper)
+- Trained **RoboSubtaskNet checkpoint**
+- Testing and inference code
+- Evaluation scripts
+- Qualitative visualization utilities
+- Representative test samples
+- Precomputed predictions for the held-out test set
+- Implementations and trained checkpoints for five comparison methods:
+  - MS-TCN
+  - MS-TCN++
+  - ASFormer
+  - DiffAct
+  - FACT
+- Real-time Kinova Gen3 experiment videos
+- Reference metrics and qualitative results reported in the manuscript
+
+### To be released upon publication
+
+- Complete **RoboSubtask dataset**
+- Full training pipeline
+- Raw-video preprocessing pipeline
+- RGB and optical-flow feature extraction pipeline
+- Dataset preparation and annotation utilities
+- Additional training configurations and implementation details
+
+These components will be released in the complete research repository following publication of the associated work.
+
+---
+
+## Real-Robot Experimental Demonstration
+
+The primary real-time experimental demonstration is available at:
+
+```text
+demo/RoboSubtaskNet_Realtime_Experiments.mp4
+```
+
+The video demonstrates the **Kinova Gen3 robotic manipulator executing four manipulation tasks end-to-end using the subtask predictions generated by RoboSubtaskNet**.
+
+The `demo/` directory also contains three additional test sequences:
+
+```text
+pick_place_demo_1.avi
+pick_pour_demo_1.avi
+pick_pour_demo_2.avi
+```
+
+These videos were recorded during evaluation of the live inference and robot-execution pipeline and provide supplementary examples of the system operating on the manipulation tasks considered in the qualitative analysis.
+
+---
+
+## Quantitative Results
+
+The following results correspond to the evaluation reported in the associated manuscript.
 
 | Model | F1@10 | F1@25 | F1@50 | Edit | Accuracy |
-|---|---|---|---|---|---|
+|---|---:|---:|---:|---:|---:|
 | MS-TCN | 98.83 | 98.68 | 95.67 | 98.52 | 93.00 |
 | MS-TCN++ | 98.43 | 98.41 | 94.39 | 98.39 | 93.18 |
 | ASFormer | 99.21 | 99.21 | 87.97 | 99.27 | 94.41 |
 | DiffAct | 98.28 | 96.57 | 88.38 | 98.98 | 88.58 |
-| FACT | 99.24 | 98.34 | 97.63 | 99.48 | 93.47 |
+| FACT | 99.24 | 98.34 | **97.63** | **99.48** | 93.47 |
 | **RoboSubtaskNet** | **99.34** | **99.21** | 97.50 | **99.48** | **94.33** |
 
-These are the paper's official numbers. **This repo also ships each
-model's trained checkpoint so you can reproduce them yourself** — doing
-so may show slight differences from the table above (a few tenths of a
-point for most models; a bit more for DiffAct, which uses stochastic
-diffusion sampling at inference). This is expected and documented in
-[`baselines/README.md`](baselines/README.md), including exactly which
-checkpoint/epoch produced each number and why.
+The values above correspond to the reference results reported in the manuscript.
 
-## Qualitative results
+Trained checkpoints for RoboSubtaskNet and the five comparison methods are included to facilitate evaluation and qualitative comparison. Minor numerical variations may occur when metrics are recomputed from individual checkpoints because of checkpoint selection, inference configuration, and stochastic inference procedures. In particular, DiffAct may exhibit additional variation due to its diffusion-based inference process.
 
-Ground truth vs. all 6 models' predictions on representative test videos
-(regenerable — see below):
+Detailed checkpoint information and reproduction instructions are provided in:
+
+```text
+baselines/README.md
+```
+
+---
+
+## Qualitative Results
+
+The repository includes qualitative comparisons between the ground-truth temporal annotations and predictions generated by all six evaluated methods:
+
+- MS-TCN
+- MS-TCN++
+- ASFormer
+- DiffAct
+- FACT
+- RoboSubtaskNet
 
 ![Pick-and-place segmentation](figures/our_data_pick_place_seg.jpg)
 ![Pick-and-pour segmentation](figures/our_data_pick_pour_seg.jpg)
 
-## Quick start
+The corresponding comparison figures can be regenerated using the provided visualization scripts.
+
+---
+
+## Quick Start
+
+Install the required dependencies:
 
 ```bash
 pip install -r requirements.txt -r baselines/requirements.txt
+```
 
-# RoboSubtaskNet: predict + evaluate on the included sample
+Run RoboSubtaskNet inference on the included representative test samples:
+
+```bash
 python main.py --action predict
+```
+
+Evaluate the generated predictions:
+
+```bash
 python eval.py
+```
 
-# Regenerate the combined 6-model qualitative figure above
+Generate the six-model qualitative comparison:
+
+```bash
 python visualize_fig5_all.py --task pick_place --robo_idx 482
-python visualize_fig5_all.py --task pick_pour  --robo_idx 512
+python visualize_fig5_all.py --task pick_pour --robo_idx 512
 ```
 
-`eval.py`'s output here reflects only the **8-video sample** included in
-this repo (a quick, small demo, not the full 160-video test set), so its
-aggregate numbers will look different from the reference table above —
-that's expected. See [baselines/README.md](baselines/README.md) for how
-to reproduce each baseline's own numbers, and the permanent repo for
-evaluation against the full test set.
+> **Note:** The `eval.py` results obtained from the current repository correspond only to the **8 representative test videos included in this release**. They should therefore not be expected to exactly reproduce the aggregate metrics reported for the complete 160-video test set in the table above.
 
-## What's included
+---
 
-```
+## Repository Structure
+
+```text
 RoboSubtaskNet_Showcase/
-├── model.py  batch_gen.py  main.py  eval.py     # RoboSubtaskNet testing code
-├── visualize_fig5_all.py                        # visualization code (all 6 models)
-├── norm_stats_rgb.npz  norm_stats_flow.npz  class_weights.npy
-├── model/bottleneck_h128fm48_dropout03/          # our trained checkpoint
-├── results/bottleneck_h128fm48_dropout03/        # full 160-video precomputed predictions
-├── paper_results/                                # official reference metrics/plots (full test set)
-├── baselines/                                     # 5 baseline architectures, same trained-checkpoint
-│   ├── README.md                                 #   pattern as the permanent repo -- see it for
-│   └── MSTCN/ MSTCN2/ ASFormer/ DiffAct/ FACT/    #   checkpoint provenance + reproduction notes
-├── dataset/                                       # SMALL SAMPLE: 8 representative test videos
-│   ├── test/{features_rgb,features_flow,groundtruth}/
-│   ├── splits/{test,val}.bundle
+│
+├── model.py
+├── batch_gen.py
+├── main.py
+├── eval.py
+│   └── RoboSubtaskNet inference and evaluation
+│
+├── visualize_fig5_all.py
+│   └── Qualitative visualization for all six evaluated models
+│
+├── norm_stats_rgb.npz
+├── norm_stats_flow.npz
+├── class_weights.npy
+│
+├── model/
+│   └── bottleneck_h128fm48_dropout03/
+│       └── Trained RoboSubtaskNet checkpoint
+│
+├── results/
+│   └── bottleneck_h128fm48_dropout03/
+│       └── Precomputed predictions
+│
+├── baselines/
+│   ├── README.md
+│   ├── MSTCN/
+│   ├── MSTCN2/
+│   ├── ASFormer/
+│   ├── DiffAct/
+│   └── FACT/
+│
+├── dataset/
+│   ├── test/
+│   │   ├── features_rgb/
+│   │   ├── features_flow/
+│   │   └── groundtruth/
+│   ├── splits/
+│   │   ├── test.bundle
+│   │   └── val.bundle
 │   └── mapping.txt
-├── figures/                                       # workflow pipeline + qualitative comparison figures
-├── demo/                                           # IROS demo video + 3 informal test clips
-├── requirements.txt  baselines/requirements.txt
+│
+├── figures/
+│   └── Pipeline and qualitative comparison figures
+│
+├── demo/
+│   └── Real-robot demonstration and supplementary test videos
+│
+├── requirements.txt
+├── baselines/requirements.txt
 ├── LICENSE
 └── README.md
 ```
 
-## Dataset sample
+---
 
-`dataset/` here ships 8 of the 160 held-out test videos (2 per task),
-selected to be **representative** — each video's average accuracy across
-all 6 models is close to that model's overall test-set average, rather
-than a cherry-picked best case. Just enough to run the testing and
-visualization code out-of-the-box without downloading the full ~1GB
-dataset. The full 1920-train/160-test dataset lives in the permanent
-repo.
+## Dataset Sample
 
-## Setup
+To enable lightweight evaluation without requiring access to the complete dataset, this repository contains **8 representative videos from the 160-video held-out test set**, with two examples selected from each manipulation task.
+
+The sample is intended for:
+
+- validating the inference pipeline,
+- testing the evaluation code,
+- reproducing qualitative visualizations, and
+- examining the expected input/output structure.
+
+The included examples were selected to provide representative evaluation cases rather than exclusively high-performing predictions.
+
+The complete dataset consists of **2,080 manipulation demonstrations**, including **1,920 training videos and 160 held-out test videos**.
+
+> The complete RoboSubtask dataset is not publicly released in the current repository. It will be made available together with the associated preprocessing and training pipeline upon publication of the corresponding work.
+
+---
+
+## Requirements
+
+The implementation has been tested with:
+
+```text
+Python >= 3.10
+PyTorch >= 2.5
+CUDA 11.8 / 12.1
+```
+
+Install the required dependencies using:
 
 ```bash
 pip install -r requirements.txt -r baselines/requirements.txt
 ```
 
-Tested with Python 3.10+, PyTorch 2.5+ (CUDA 11.8/12.1).
+---
+
+## Reproducibility
+
+The current repository is designed primarily for **trained-model evaluation and qualitative reproduction**.
+
+The following components are provided:
+
+- trained checkpoints,
+- representative evaluation samples,
+- reference predictions,
+- evaluation scripts,
+- baseline comparison code, and
+- qualitative visualization utilities.
+
+Full end-to-end reproduction starting from raw demonstration videos will be supported with the release of the complete preprocessing, training, and dataset-generation pipeline upon publication.
+
+---
 
 ## License
 
-MIT + Commons Clause (see [LICENSE](LICENSE)) — free to use, modify, and
-redistribute; commercial resale of the software itself is not permitted.
-Baseline architectures in `baselines/` are adapted from their respective
-upstream repositories (MS-TCN, MS-TCN++, ASFormer, DiffAct, FACT).
+The repository is distributed under the terms specified in the `LICENSE` file.
+
+Baseline implementations contained in `baselines/` are adapted from their respective original repositories, including MS-TCN, MS-TCN++, ASFormer, DiffAct, and FACT. Users should also refer to the licenses and citation requirements of the corresponding original implementations.
+
+---
 
 ## Citation
 
-If you use this code, please cite the associated paper. A citation entry
-will be added here once the paper is published; in the meantime please
-contact the authors.
+If you find this repository useful in your research, please consider citing the associated work. The BibTeX citation will be added following publication of the paper.
+
+```bibtex
+@article{robosubtasknet,
+  title   = {RoboSubtaskNet: Execution-Aware Temporal Primitive Segmentation for Human-to-Robot Manipulation Across Variable Workspaces},
+  author  = {...},
+  journal = {...},
+  year    = {...}
+}
+```
+
+---
+
+## Release Notice
+
+This repository represents the **evaluation and demonstration release** of RoboSubtaskNet.
+
+The complete research artifact — including the full dataset, training code, preprocessing pipeline, feature extraction utilities, and additional implementation details — will be released upon publication of the corresponding work.

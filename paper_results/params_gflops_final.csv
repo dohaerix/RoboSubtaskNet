@@ -1,7 +1,0 @@
-Model,Params (M),GFLOPs
-MS-TCN,0.795,0.087
-MS-TCN++,0.993,0.109
-ASFormer,1.130,0.153
-FACT,8.896,0.580
-DiffAct,1.204,0.418
-RoboSubtaskNet,0.819,0.090
