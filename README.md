@@ -23,9 +23,9 @@ published)*.
 Human demonstration video → RoboSubtaskNet sub-task segmentation → DMP
 goal resolution → robot execution, without retraining the control policy.
 
-## Demo video
+## Real-time Experiments Demonstration
 
-[`demo/RoboSubtaskNet_IROS_demo.mp4`](demo/RoboSubtaskNet_IROS_demo.mp4)
+[`demo/RoboSubtaskNet_Realtime_Experments.mp4`](demo/RoboSubtaskNet_Realtime_Experments.mp4)
 — the IROS submission demonstration video: the Kinova Gen3 arm executing
 all four manipulation tasks end to end, driven by RoboSubtaskNet's
 sub-task predictions (see [Pipeline](#pipeline) above for the mechanism
@@ -45,8 +45,8 @@ polished as the main demo video, but real footage of the model running.
 | MS-TCN++ | 98.43 | 98.41 | 94.39 | 98.39 | 93.18 |
 | ASFormer | 99.21 | 99.21 | 87.97 | 99.27 | 94.41 |
 | DiffAct | 98.28 | 96.57 | 88.38 | 98.98 | 88.58 |
-| FACT | 99.24 | 99.34 | 97.63 | 99.48 | 93.47 |
-| **RoboSubtaskNet** | **99.34** | **99.21** | **97.50** | **99.48** | **94.33** |
+| FACT | 99.24 | 98.34 | 97.63 | 99.48 | 93.47 |
+| **RoboSubtaskNet** | **99.34** | **99.21** | 97.50 | **99.48** | **94.33** |
 
 These are the paper's official numbers. **This repo also ships each
 model's trained checkpoint so you can reproduce them yourself** — doing
