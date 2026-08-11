@@ -33,7 +33,6 @@ The current release provides the components necessary to evaluate and visualize 
 - Evaluation scripts
 - Qualitative visualization utilities
 - Representative test samples
-- Precomputed predictions for the held-out test set
 - Implementations and trained checkpoints for five comparison methods:
   - MS-TCN
   - MS-TCN++
@@ -173,10 +172,6 @@ RoboSubtaskNet_Showcase/
 │   └── bottleneck_h128fm48_dropout03/
 │       └── Trained RoboSubtaskNet checkpoint
 │
-├── results/
-│   └── bottleneck_h128fm48_dropout03/
-│       └── Precomputed predictions
-│
 ├── baselines/
 │   ├── README.md
 │   ├── MSTCN/
@@ -254,7 +249,6 @@ The following components are provided:
 
 - trained checkpoints,
 - representative evaluation samples,
-- reference predictions,
 - evaluation scripts,
 - baseline comparison code, and
 - qualitative visualization utilities.

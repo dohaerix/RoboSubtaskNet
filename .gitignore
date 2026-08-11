@@ -3,3 +3,8 @@ __pycache__/
 *.pyo
 .DS_Store
 Thumbs.db
+
+# regenerated locally by `python main.py --action predict` / `python eval.py`
+# (root-level only -- baselines/*/results/ and results_table.* are intentionally tracked)
+/results/
+/results_table.pdf
