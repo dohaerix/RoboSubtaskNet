@@ -31,7 +31,6 @@ Pick
 Pick
 Pick
 Pick
-Pick
 Give
 Give
 Give
@@ -46,10 +45,7 @@ Give
 Give
 Give
 Give
-Give
-Give
-Give
-Give
+Withdraw
 Withdraw
 Withdraw
 Withdraw

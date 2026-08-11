@@ -1,2 +1,2 @@
 Model,Input length T (mean test frames),Params,Params (M),MACs,GMACs,FLOPs,GFLOPs
-"RoboSubtaskNet-Bottleneck (H=128, f_maps=48, dropout=0.3)",52,818912,0.819,42312192,0.042,84624384,0.085
+"RoboSubtaskNet-Bottleneck (H=128, f_maps=48, dropout=0.3)",56,818912,0.819,45566976,0.046,91133952,0.091

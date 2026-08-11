@@ -220,7 +220,7 @@ The sample is intended for:
 - reproducing qualitative visualizations, and
 - examining the expected input/output structure.
 
-The pick-and-place and pick-and-pour examples were specifically selected such that their per-video accuracy closely matches RoboSubtaskNet's aggregate accuracy reported in the manuscript (94.33%), rather than being chosen for exclusively high-performing predictions.
+All six videos were selected such that their per-video accuracy closely matches RoboSubtaskNet's aggregate accuracy reported in the manuscript (94.33%) — the resulting sample yields an overall accuracy of 94.28% — rather than being chosen for exclusively high-performing predictions.
 
 The complete dataset consists of **2,080 manipulation demonstrations**, including **1,920 training videos and 160 held-out test videos**.
 

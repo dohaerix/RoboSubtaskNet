@@ -18,6 +18,7 @@ Reach
 Reach
 Reach
 Reach
+Reach
 Pick
 Pick
 Pick
@@ -31,6 +32,8 @@ Pick
 Pick
 Pick
 Pick
+Pick
+Pick
 Give
 Give
 Give
@@ -47,12 +50,10 @@ Give
 Give
 Give
 Give
-Give
-Give
-Give
-Give
-Give
-Give
+Withdraw
+Withdraw
+Withdraw
+Withdraw
 Withdraw
 Withdraw
 Withdraw
