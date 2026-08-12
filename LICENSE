@@ -1,6 +1,6 @@
 MIT+CC License
 
-Copyright (c) 2026 Deepesh (RoboSubtaskNet)
+Copyright (c) 2026 dohaerix (RoboSubtaskNet)
 Portions derived from MS-TCN, Copyright (c) 2019 Y. Abu Farha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -43,4 +43,4 @@ Software: All RoboSubtaskNet-associated files (model.py, batch_gen.py,
 main.py, eval.py, downsample_labels.py, compute_transitions.py,
 compute_norm_stats.py) and the accompanying robot-subtask dataset.
 License: MIT
-Licensor: Deepesh
+Licensor: dohaerix
